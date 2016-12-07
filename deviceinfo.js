@@ -62,4 +62,10 @@ module.exports = {
   isTablet: function() {
     return RNDeviceInfo.isTablet;
   },
+  getAppName: function() {
+    return RNDeviceInfo.name;
+  },
+  getAppDisplayName: function() {
+      return RNDeviceInfo.displayName;
+  },
 };

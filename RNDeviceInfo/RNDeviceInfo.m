@@ -168,6 +168,10 @@ RCT_EXPORT_MODULE()
 
     NSString *uniqueId = [DeviceUID uid];
 
+    NSString *displayName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    if(displayName == nil)
+        displayName = @"";
+
     return @{
              @"systemName": currentDevice.systemName,
              @"systemVersion": currentDevice.systemVersion,
@@ -186,6 +190,8 @@ RCT_EXPORT_MODULE()
              @"timezone": self.timezone,
              @"isEmulator": @(self.isEmulator),
              @"isTablet": @(self.isTablet),
+             @"name": [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"],
+             @"displayName": displayName,
              };
 }
 
