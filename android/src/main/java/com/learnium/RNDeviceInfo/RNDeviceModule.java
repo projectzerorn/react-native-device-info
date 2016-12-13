@@ -6,18 +6,16 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.provider.Settings.Secure;
-
 import com.google.android.gms.iid.InstanceID;
-
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
-
 import javax.annotation.Nullable;
+import android.content.pm.ApplicationInfo;
+
 
 public class RNDeviceModule extends ReactContextBaseJavaModule {
 
@@ -84,6 +82,11 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
       PackageInfo info = packageManager.getPackageInfo(packageName, 0);
       constants.put("appVersion", info.versionName);
       constants.put("buildNumber", info.versionCode);
+
+      ApplicationInfo aInfo = packageManager.getApplicationInfo(packageName, 0);
+      String displayName = packageManager.getApplicationLabel(aInfo).toString();
+      constants.put("name", packageName);
+      constants.put("displayName", displayName);
     } catch (PackageManager.NameNotFoundException e) {
       e.printStackTrace();
     }
